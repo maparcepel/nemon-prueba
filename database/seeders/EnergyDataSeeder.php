@@ -17,7 +17,7 @@ class EnergyDataSeeder extends Seeder
             $date = Carbon::now()->subDays($day)->format('Y-m-d');
 
             $priceData = ['date' => $date];
-            for ($hour = 1; $hour <= 25; $hour++) {
+            for ($hour = 1; $hour < 25; $hour++) {
                 $priceData["h$hour"] = 0.1;
             }
 
@@ -32,7 +32,7 @@ class EnergyDataSeeder extends Seeder
 
             $consumptionData = ['date' => $date];
 
-            for ($hour = 1; $hour <= 25; $hour++) {
+            for ($hour = 1; $hour < 25; $hour++) {
                 $consumptionData["h$hour"] = 10.0;
             }
 
