@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Exceptions\InvalidFormulaException;
 use App\Exceptions\NoDataFoundException;
-use App\Models\Consumption;
-use App\Models\Price;
+use App\Repositories\ConsumptionRepository;
+use App\Repositories\PriceRepository;
 use Illuminate\Support\Collection;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\SyntaxError;
@@ -19,8 +19,10 @@ class EnergyCalculatorService
      */
     private const HOURS_PER_DAY = 25;
 
-    public function __construct()
-    {
+    public function __construct(
+        private ConsumptionRepository $consumptionRepository,
+        private PriceRepository $priceRepository
+    ) {
         $this->expressionLanguage = new ExpressionLanguage;
     }
 
@@ -40,40 +42,12 @@ class EnergyCalculatorService
         // Validate formula syntax early (before processing data)
         $this->validateAndTestFormula($formula);
 
-        $consumptions = $this->getConsumptionsInRange($startDate, $endDate);
-        $prices = $this->getPricesInRange($startDate, $endDate);
+        $consumptions = $this->consumptionRepository->getByDateRange($startDate, $endDate);
+        $prices = $this->priceRepository->getByDateRange($startDate, $endDate);
 
         $this->validateDataExists($consumptions, $prices, $startDate, $endDate);
 
         return $this->performCalculation($consumptions, $prices, $formula);
-    }
-
-    /**
-     * Retrieve consumption records for the specified date range.
-     *
-     * @param  string  $startDate  Start date in Y-m-d format
-     * @param  string  $endDate  End date in Y-m-d format
-     * @return Collection<string, Consumption> Consumptions keyed by date
-     */
-    private function getConsumptionsInRange(string $startDate, string $endDate): Collection
-    {
-        return Consumption::whereBetween('date', [$startDate, $endDate])
-            ->get()
-            ->keyBy(fn ($consumption) => (string) $consumption->date);
-    }
-
-    /**
-     * Retrieve price records for the specified date range.
-     *
-     * @param  string  $startDate  Start date in Y-m-d format
-     * @param  string  $endDate  End date in Y-m-d format
-     * @return Collection<string, Price> Prices keyed by date
-     */
-    private function getPricesInRange(string $startDate, string $endDate): Collection
-    {
-        return Price::whereBetween('date', [$startDate, $endDate])
-            ->get()
-            ->keyBy(fn ($price) => (string) $price->date);
     }
 
     /**

@@ -35,10 +35,7 @@ class EnergyCalculatorController extends Controller
     /**
      * Retrieve all consumptions.
      */
-    public function getConsumptions(): array
-    {
-        // TODO
-    }
+    public function getConsumptions(): array {}
 
     /**
      * Retrieve all prices.
