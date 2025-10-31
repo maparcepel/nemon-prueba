@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CalculateRequest;
+use App\Repositories\ConsumptionRepository;
+use App\Repositories\PriceRepository;
 use App\Services\EnergyCalculatorService;
 
 class EnergyCalculatorController extends Controller
 {
-    public function __construct(private EnergyCalculatorService $calculatorService) {}
+    public function __construct(
+        private EnergyCalculatorService $calculatorService,
+        private ConsumptionRepository $consumptionRepository,
+        private PriceRepository $priceRepository
+    ) {}
 
     /**
      * Handle the energy cost calculation request.
@@ -34,14 +40,21 @@ class EnergyCalculatorController extends Controller
 
     /**
      * Retrieve all consumptions.
+     *
+     * @return array<string, Consumption>
      */
-    public function getConsumptions(): array {}
+    public function getConsumptions(): array
+    {
+        return $this->consumptionRepository->getAll()->toArray();
+    }
 
     /**
      * Retrieve all prices.
+     *
+     * @return array<string, Price>
      */
     public function getPrices(): array
     {
-        // TODO
+        return $this->priceRepository->getAll()->toArray();
     }
 }

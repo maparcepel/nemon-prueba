@@ -21,4 +21,14 @@ class ConsumptionRepository
             ->get()
             ->keyBy(fn ($consumption) => (string) $consumption->date);
     }
+
+    /**
+     * Retrieve all consumption records.
+     *
+     * @return Collection<string, Consumption>
+     */
+    public function getAll(): Collection
+    {
+        return Consumption::orderBy('date')->get()->keyBy(fn ($consumption) => (string) $consumption->date);
+    }
 }

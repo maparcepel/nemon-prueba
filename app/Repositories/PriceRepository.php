@@ -21,4 +21,14 @@ class PriceRepository
             ->get()
             ->keyBy(fn ($price) => (string) $price->date);
     }
+
+    /**
+     * Retrieve all price records.
+     *
+     * @return Collection<string, Price>
+     */
+    public function getAll(): Collection
+    {
+        return Price::orderBy('date')->get()->keyBy(fn ($price) => (string) $price->date);
+    }
 }
