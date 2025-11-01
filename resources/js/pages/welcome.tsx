@@ -25,7 +25,7 @@ export default function Welcome() {
                     </Col>
                 </Row>
                 <DatesProvider>
-                    <Row>
+                    <Row className="mb-5">
                         <Col className="mt-4" md={3} lg={2}>
                             <DateList />
                         </Col>

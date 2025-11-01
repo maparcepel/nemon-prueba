@@ -13,8 +13,10 @@ export default function DateDetails() {
     for (let hour = 1; hour <= 25; hour++) {
       const hourKey = `h${hour}`;
 
-      const getHourValue = (obj: any, key: string): number => {
-        return obj && typeof obj[key] === 'number' ? obj[key] : 0;
+      const getHourValue = (obj: unknown, key: string): number => {
+        return obj && typeof obj === 'object' && obj !== null &&
+          key in obj && typeof (obj as Record<string, unknown>)[key] === 'number'
+          ? (obj as Record<string, unknown>)[key] as number : 0;
       };
 
       const consumption = getHourValue(dateDetails.consumption, hourKey);
@@ -111,7 +113,7 @@ export default function DateDetails() {
           </Badge>
         </div>
       </Card.Header>
-      <Card.Body style={{ maxHeight: '500px', overflowY: 'auto' }}>
+      <Card.Body style={{ maxHeight: 'auto', overflowY: 'auto' }}>
         <Table striped hover responsive size="sm">
           <thead className="sticky-top bg-light">
             <tr>
@@ -131,21 +133,11 @@ export default function DateDetails() {
                   <span className={consumption > 0 ? 'text-success' : 'text-muted'}>
                     {formatNumber(consumption)}
                   </span>
-                  {consumption > 0 && (
-                    <small className="text-muted d-block">
-                      kWh
-                    </small>
-                  )}
                 </td>
                 <td>
                   <span className={price > 0 ? 'text-primary' : 'text-muted'}>
                     {formatNumber(price, 6)}
                   </span>
-                  {price > 0 && (
-                    <small className="text-muted d-block">
-                      €/kWh
-                    </small>
-                  )}
                 </td>
               </tr>
             ))}
