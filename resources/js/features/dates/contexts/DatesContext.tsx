@@ -1,10 +1,11 @@
 import React, { createContext, ReactNode, useContext } from 'react';
 import { useDates } from '../hooks/useDates';
+import { DateDetailData } from '../types/dates.types';
 
 interface DatesContextType {
   availableDates: string[];
   selectedDate: string | null;
-  dateDetails: any;
+  dateDetails: DateDetailData | null;
   loading: boolean;
   error: string;
   handleDateSelect: (date: string) => void;

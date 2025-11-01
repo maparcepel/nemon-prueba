@@ -2,18 +2,11 @@ import CalculationForm from '@/features/calculation/CalculationForm';
 import DateDetails from '@/features/DateDetails';
 import DateList from '@/features/DateList';
 import { DatesProvider } from '@/features/dates/contexts/DatesContext';
-import { type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 
-export default function Welcome({
-    canRegister = true,
-}: {
-    canRegister?: boolean;
-}) {
-    const { auth } = usePage<SharedData>().props;
-
+export default function Welcome() {
     return (
         <>
             <Head title="Nemon">

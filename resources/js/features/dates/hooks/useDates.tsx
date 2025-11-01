@@ -31,7 +31,6 @@ export const useDates = () => {
         axios.get<PriceData[]>('/api/prices')
       ]);
 
-      // Extraer fechas únicas de ambas fuentes
       const consumptionDates = consumptionsResponse.data.map(c => c.date);
       const priceDates = pricesResponse.data.map(p => p.date);
 
@@ -40,7 +39,6 @@ export const useDates = () => {
 
       setAvailableDates(sortedDates);
 
-      // Seleccionar la primera fecha por defecto
       if (sortedDates.length > 0) {
         setSelectedDate(sortedDates[0]);
       }

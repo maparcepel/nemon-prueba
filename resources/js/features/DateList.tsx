@@ -10,16 +10,6 @@ export default function DateList() {
     handleDateSelect
   } = useDatesContext();
 
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('es-ES', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
   if (loading && availableDates.length === 0) {
     return (
       <Card>

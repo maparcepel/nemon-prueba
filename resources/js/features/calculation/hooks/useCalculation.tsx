@@ -48,7 +48,6 @@ export const useCalculation = (): UseCalculationReturn => {
         if (err.response?.data?.error) {
           setError(err.response.data.error);
         } else if (err.response?.status === 422) {
-          // Validation errors
           const validationErrors = err.response.data?.errors;
           if (validationErrors) {
             const firstError = Object.values(validationErrors)[0];

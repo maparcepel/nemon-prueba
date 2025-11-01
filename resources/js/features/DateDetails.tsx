@@ -13,13 +13,12 @@ export default function DateDetails() {
     for (let hour = 1; hour <= 25; hour++) {
       const hourKey = `h${hour}`;
 
-      const consumption = dateDetails.consumption
-        ? Number((dateDetails.consumption as any)[hourKey]) || 0
-        : 0;
+      const getHourValue = (obj: any, key: string): number => {
+        return obj && typeof obj[key] === 'number' ? obj[key] : 0;
+      };
 
-      const price = dateDetails.price
-        ? Number((dateDetails.price as any)[hourKey]) || 0
-        : 0;
+      const consumption = getHourValue(dateDetails.consumption, hourKey);
+      const price = getHourValue(dateDetails.price, hourKey);
 
       hourlyData.push({
         hour,
@@ -29,11 +28,6 @@ export default function DateDetails() {
     }
 
     return hourlyData;
-  };
-
-  const formatHour = (hour: number): string => {
-    if (hour === 25) return '00:00 (día siguiente)';
-    return `${hour.toString().padStart(2, '0')}:00`;
   };
 
   const formatNumber = (value: number, decimals: number = 3): string => {
