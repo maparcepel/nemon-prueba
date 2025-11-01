@@ -21,8 +21,10 @@ class EnergyCalculatorController extends Controller
 
     /**
      * Handle the energy cost calculation request.
+     *
+     * @throws ApiException
      */
-    public function calculate(CalculateRequest $request)
+    public function calculate(CalculateRequest $request): JsonResponse
     {
         try {
             $result = $this->calculatorService->calculateIndexedPrice(

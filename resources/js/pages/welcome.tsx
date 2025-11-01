@@ -25,7 +25,7 @@ export default function Welcome({
             </Head>
 
             <Container>
-                <h1>Nemon - Calculadora de precios de energía indexados</h1>
+                <h1 className="my-4">Nemon</h1>
                 <Row>
                     <Col>
                         <CalculationForm />
@@ -33,11 +33,11 @@ export default function Welcome({
                 </Row>
                 <DatesProvider>
                     <Row>
-                        <Col md={2}>
+                        <Col className="mt-4" md={3} lg={2}>
                             <DateList />
                         </Col>
 
-                        <Col md={10}>
+                        <Col className="mt-4" md={9} lg={10}>
                             <DateDetails />
                         </Col>
                     </Row>

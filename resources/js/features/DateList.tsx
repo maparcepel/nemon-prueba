@@ -68,9 +68,6 @@ export default function DateList() {
     <Card>
       <Card.Header className="d-flex justify-content-between align-items-center">
         <h5 className="mb-0">Fechas Disponibles</h5>
-        <small className="text-muted">
-          {availableDates.length} fecha{availableDates.length !== 1 ? 's' : ''}
-        </small>
       </Card.Header>
       <ListGroup variant="flush" style={{ maxHeight: '400px', overflowY: 'auto' }}>
         {availableDates.map((date: string) => (
@@ -82,8 +79,7 @@ export default function DateList() {
             className="d-flex justify-content-between align-items-center"
           >
             <div>
-              <div className="fw-bold">{formatDate(date)}</div>
-              <small className="text-muted">{date}</small>
+              <small className="fw-bold">{date}</small>
             </div>
             {loading && selectedDate === date && (
               <Spinner animation="border" size="sm" />

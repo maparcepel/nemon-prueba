@@ -130,11 +130,8 @@ export default function DateDetails() {
             {hourlyData.map(({ hour, consumption, price }) => (
               <tr key={hour}>
                 <td>
-                  <strong>H{hour}</strong>
+                  <strong>h{hour}</strong>
                   <br />
-                  <small className="text-muted">
-                    {formatHour(hour)}
-                  </small>
                 </td>
                 <td>
                   <span className={consumption > 0 ? 'text-success' : 'text-muted'}>
@@ -165,16 +162,6 @@ export default function DateDetails() {
           <Alert variant="warning" className="mt-3">
             No hay datos de consumo ni precio para esta fecha
           </Alert>
-        )}
-
-        {(hasConsumption || hasPrice) && (
-          <div className="mt-3 text-muted">
-            <small>
-              • Los valores en 0 indican que no hay datos para esa hora
-              <br />
-              • H25 corresponde a la hora 00:00 del día siguiente
-            </small>
-          </div>
         )}
       </Card.Body>
     </Card>
