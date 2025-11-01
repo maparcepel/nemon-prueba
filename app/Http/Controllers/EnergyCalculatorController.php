@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ApiException;
 use App\Http\Requests\CalculateRequest;
 use App\Repositories\ConsumptionRepository;
 use App\Repositories\PriceRepository;
 use App\Services\EnergyCalculatorService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class EnergyCalculatorController extends Controller
 {
@@ -39,22 +43,22 @@ class EnergyCalculatorController extends Controller
     }
 
     /**
-     * Retrieve all consumptions.
-     *
-     * @return array<string, Consumption>
+     * Retrieve all consumptions with their dates.
      */
-    public function getConsumptions(): array
+    public function getConsumptions(): JsonResponse
     {
-        return $this->consumptionRepository->getAll()->toArray();
+        $consumptions = $this->consumptionRepository->getAll();
+
+        return response()->json($consumptions->values());
     }
 
     /**
-     * Retrieve all prices.
-     *
-     * @return array<string, Price>
+     * Retrieve all prices with their dates.
      */
-    public function getPrices(): array
+    public function getPrices(): JsonResponse
     {
-        return $this->priceRepository->getAll()->toArray();
+        $prices = $this->priceRepository->getAll();
+
+        return response()->json($prices->values());
     }
 }
