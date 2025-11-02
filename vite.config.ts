@@ -24,4 +24,19 @@ export default defineConfig({
     esbuild: {
         jsx: 'automatic',
     },
+    build: {
+        manifest: true,
+        outDir: 'public/build',
+        rollupOptions: {
+            input: ['resources/css/app.css', 'resources/js/app.tsx'],
+        },
+    },
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: 'localhost',
+        },
+    },
 });
