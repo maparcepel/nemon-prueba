@@ -13,10 +13,18 @@ Route::get('/api-test', function () {
         'timestamp' => now(),
         'endpoints' => [
             'POST /api/calculate' => 'Calcular precio de energía',
-            'GET /api/consumptions' => 'Obtener datos de consumo', 
-            'GET /api/prices' => 'Obtener precios'
-        ]
+            'GET /api/consumptions' => 'Obtener datos de consumo',
+            'GET /api/prices' => 'Obtener precios',
+        ],
     ];
+});
+
+Route::get('/welcome-full', function () {
+    try {
+        return Inertia::render('welcome');
+    } catch (\Exception $e) {
+        return 'Error en welcome completa: ' . $e->getMessage();
+    }
 });
 
 Route::get('/debug', function () {
@@ -42,7 +50,14 @@ Route::get('/simple', function () {
 });
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    try {
+        return Inertia::render('welcome-simple');
+    } catch (\Exception $e) {
+        return 'Error en Inertia: ' . $e->getMessage() . '<br><br>' .
+               '<a href="/simple">Ruta simple</a> | ' . 
+               '<a href="/debug">Debug</a> | ' .
+               '<a href="/api-test">API Test</a>';
+    }
 })->name('home');
 
 // Rutas de autenticación temporalmente deshabilitadas
