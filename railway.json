@@ -3,7 +3,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "cd /app && php artisan migrate --force && php -S 0.0.0.0:$PORT -t public",
+    "startCommand": "php artisan migrate --force && service apache2 start && tail -f /var/log/apache2/error.log",
     "restartPolicyType": "ON_FAILURE"
   }
 }
