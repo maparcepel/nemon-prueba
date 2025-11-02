@@ -3,7 +3,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "php artisan migrate --force && service apache2 start && tail -f /var/log/apache2/error.log",
+    "startCommand": "php artisan migrate --force && apache2-foreground",
     "restartPolicyType": "ON_FAILURE"
   }
 }
