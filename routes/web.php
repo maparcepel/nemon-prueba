@@ -23,7 +23,7 @@ Route::get('/welcome-full', function () {
     try {
         return Inertia::render('welcome');
     } catch (\Exception $e) {
-        return 'Error en welcome completa: ' . $e->getMessage();
+        return 'Error en welcome completa: '.$e->getMessage();
     }
 });
 
@@ -53,9 +53,9 @@ Route::get('/', function () {
     try {
         return Inertia::render('welcome-simple');
     } catch (\Exception $e) {
-        return 'Error en Inertia: ' . $e->getMessage() . '<br><br>' .
-               '<a href="/simple">Ruta simple</a> | ' . 
-               '<a href="/debug">Debug</a> | ' .
+        return 'Error en Inertia: '.$e->getMessage().'<br><br>'.
+               '<a href="/simple">Ruta simple</a> | '.
+               '<a href="/debug">Debug</a> | '.
                '<a href="/api-test">API Test</a>';
     }
 })->name('home');
