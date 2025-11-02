@@ -5,13 +5,13 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/test', function () {
-    return "¡Laravel funciona!";
+    return '¡Laravel funciona!';
 });
 
 Route::get('/debug', function () {
     $manifestPath = public_path('build/manifest.json');
     $manifestExists = file_exists($manifestPath);
-    
+
     return [
         'app_env' => app()->environment(),
         'app_debug' => config('app.debug'),
@@ -27,7 +27,7 @@ Route::get('/debug', function () {
 });
 
 Route::get('/simple', function () {
-    return '<h1>Simple Laravel Route - Working!</h1><p>Environment: ' . app()->environment() . '</p>';
+    return '<h1>Simple Laravel Route - Working!</h1><p>Environment: '.app()->environment().'</p>';
 });
 
 Route::get('/', function () {
@@ -36,7 +36,7 @@ Route::get('/', function () {
             'canRegister' => Features::enabled(Features::registration()),
         ]);
     } catch (\Exception $e) {
-        return 'Inertia Error: ' . $e->getMessage() . '<br><br><a href="/simple">Try Simple Route</a> | <a href="/debug">Debug Info</a>';
+        return 'Inertia Error: '.$e->getMessage().'<br><br><a href="/simple">Try Simple Route</a> | <a href="/debug">Debug Info</a>';
     }
 })->name('home');
 
