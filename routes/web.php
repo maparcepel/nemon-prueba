@@ -31,19 +31,21 @@ Route::get('/simple', function () {
 });
 
 Route::get('/', function () {
-    try {
-        return Inertia::render('welcome', [
-            'canRegister' => Features::enabled(Features::registration()),
-        ]);
-    } catch (\Exception $e) {
-        return 'Inertia Error: '.$e->getMessage().'<br><br><a href="/simple">Try Simple Route</a> | <a href="/debug">Debug Info</a>';
-    }
+    return '<h1>🎉 ¡Aplicación funcionando!</h1>
+            <p><strong>Entorno:</strong> ' . app()->environment() . '</p>
+            <p><strong>APP_KEY configurado:</strong> ' . (config('app.key') ? 'Sí' : 'No') . '</p>
+            <ul>
+                <li><a href="/test">Test básico</a></li>
+                <li><a href="/debug">Información de debug</a></li>
+                <li><a href="/simple">Ruta simple</a></li>
+            </ul>';
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-});
+// Rutas de autenticación temporalmente deshabilitadas
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('dashboard', function () {
+//         return Inertia::render('dashboard');
+//     })->name('dashboard');
+// });
 
-require __DIR__.'/settings.php';
+// require __DIR__.'/settings.php';
