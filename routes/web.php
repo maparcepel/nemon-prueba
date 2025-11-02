@@ -7,6 +7,18 @@ Route::get('/test', function () {
     return '¡Laravel funciona!';
 });
 
+Route::get('/api-test', function () {
+    return [
+        'message' => 'API funcionando',
+        'timestamp' => now(),
+        'endpoints' => [
+            'POST /api/calculate' => 'Calcular precio de energía',
+            'GET /api/consumptions' => 'Obtener datos de consumo', 
+            'GET /api/prices' => 'Obtener precios'
+        ]
+    ];
+});
+
 Route::get('/debug', function () {
     $manifestPath = public_path('build/manifest.json');
     $manifestExists = file_exists($manifestPath);
