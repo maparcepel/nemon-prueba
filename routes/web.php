@@ -30,14 +30,7 @@ Route::get('/simple', function () {
 });
 
 Route::get('/', function () {
-    return '<h1>🎉 ¡Aplicación funcionando!</h1>
-            <p><strong>Entorno:</strong> '.app()->environment().'</p>
-            <p><strong>APP_KEY configurado:</strong> '.(config('app.key') ? 'Sí' : 'No').'</p>
-            <ul>
-                <li><a href="/test">Test básico</a></li>
-                <li><a href="/debug">Información de debug</a></li>
-                <li><a href="/simple">Ruta simple</a></li>
-            </ul>';
+    return Inertia::render('welcome');
 })->name('home');
 
 // Rutas de autenticación temporalmente deshabilitadas
