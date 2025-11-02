@@ -26,7 +26,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { UserMenuContent } from '@/components/user-menu-content';
+// import { UserMenuContent } from '@/components/user-menu-content';
 import { useInitials } from '@/hooks/use-initials';
 import { cn, isSameUrl, resolveUrl } from '@/lib/utils';
 import { dashboard } from '@/routes';
@@ -244,7 +244,11 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56" align="end">
-                                <UserMenuContent user={auth.user} />
+                                {/* <UserMenuContent user={auth.user} /> */}
+                                <div className="p-3 text-sm">
+                                    <div>Usuario: {auth.user.name}</div>
+                                    <div className="text-xs text-muted-foreground">{auth.user.email}</div>
+                                </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
